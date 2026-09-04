@@ -7,7 +7,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static me.alpha432.oyvey.util.traits.Util.EVENT_BUS;
 
@@ -15,7 +15,7 @@ import static me.alpha432.oyvey.util.traits.Util.EVENT_BUS;
 public class MixinMinecraft {
 
     @Inject(method = "startAttack", at = @At("HEAD"))
-    private void startAttack(CallbackInfo ci) {
+    private void startAttack(CallbackInfoReturnable<Boolean> cir) {
         EVENT_BUS.post(new DoAttackEvent());
 
         Minecraft minecraft = (Minecraft) (Object) this;
